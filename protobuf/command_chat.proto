@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option go_package = "github.com/CRaLFa/comchat";
+
+package comchat;
+
+message ChatMessage {
+    string author = 1;
+    string body = 2;
+}
+
+service CommandChat {
+    rpc Chat(stream ChatMessage) returns (stream ChatMessage) {}
+}

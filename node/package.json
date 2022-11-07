@@ -1,0 +1,18 @@
+{
+  "name": "comchat",
+  "version": "1.0.0",
+  "description": "CLI chat app using gRPC",
+  "scripts": {
+    "start": "npm run build && node ./dist/client.js",
+    "build": "tsc"
+  },
+  "author": "rana",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.7.3"
+  },
+  "devDependencies": {
+    "grpc-tools": "^1.11.3",
+    "ts-protoc-gen": "^0.15.0",
+    "typescript": "^4.8.4"
+  }
+}
