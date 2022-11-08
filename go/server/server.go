@@ -64,6 +64,7 @@ func (s *commandChatServer) receive(stream pb.CommandChat_ChatServer, errCh chan
 		} else {
 			log.Printf("Received message: {%v}", msg)
 		}
+
 		s.mu.Lock()
 		s.msgQueue = append(s.msgQueue, msg)
 		s.mu.Unlock()

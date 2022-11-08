@@ -23,8 +23,7 @@ class CustomCommandChatClient extends CommandChatClient {
 
     receive(stream: ClientDuplexStream<ChatMessage, ChatMessage>) {
         stream.on('data', (msg: ChatMessage) => {
-            const msgObj = msg.toObject();
-            console.log('%s [%s] : %s', getDateTime(), msgObj.author, msgObj.body);
+            console.log('%s [%s] : %s', getDateTime(), msg.getAuthor(), msg.getBody());
         });
     }
 

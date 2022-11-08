@@ -54,11 +54,13 @@ func (c *commandChatClient) receive(stream pb.CommandChat_ChatClient, ch chan bo
 		}
 		log.Printf("[%s] : %s\n", msg.Author, msg.Body)
 	}
+
 	ch <- true
 }
 
 func (c *commandChatClient) send(stream pb.CommandChat_ChatClient, ch chan bool) {
 	reader := bufio.NewReader(os.Stdin)
+
 	for {
 		text, err := reader.ReadString('\n')
 		if err != nil {
@@ -74,6 +76,7 @@ func (c *commandChatClient) send(stream pb.CommandChat_ChatClient, ch chan bool)
 		}
 		c.sendMessage(stream, trimmed)
 	}
+
 	ch <- true
 }
 
