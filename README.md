@@ -21,7 +21,7 @@ Simple CLI chat app using gRPC
 1. Start server
 
     ```
-    $ git clone http://10.173.0.86/git/r28503/comchat.git
+    $ git clone https://github.com/CRaLFa/comchat.git
     $ cd comchat/go
     $ go run server/server.go
     ```
