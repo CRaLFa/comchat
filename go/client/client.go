@@ -29,7 +29,8 @@ type commandChatClient struct {
 func (c *commandChatClient) runChat() {
 	stream, err := c.Chat(context.Background())
 	if err != nil {
-		log.Fatalf("Failed to chat: %v", err)
+		log.Printf("Failed to chat: %v", err)
+		return
 	}
 	defer stream.CloseSend()
 
@@ -65,6 +66,7 @@ func (c *commandChatClient) send(stream pb.CommandChat_ChatClient, ch chan bool)
 		text, err := reader.ReadString('\n')
 		if err != nil {
 			log.Printf("Failed to read: %v", err)
+			continue
 		}
 		trimmed := strings.TrimSpace(text)
 		if len(trimmed) == 0 {
@@ -112,21 +114,17 @@ func newClient(cc grpc.ClientConnInterface, userName string) *commandChatClient 
 	}
 }
 
-func doChat() {
+func main() {
 	opts := []grpc.DialOption{
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	}
 	conn, err := grpc.Dial(*serverAddr, opts...)
 	if err != nil {
-		log.Fatalf("Failed to dial: %v", err)
+		log.Printf("Failed to dial: %v", err)
+		return
 	}
 	defer conn.Close()
 
 	client := newClient(conn, getUserName())
 	client.runChat()
-}
-
-func main() {
-	doChat()
-	os.Exit(0)
 }

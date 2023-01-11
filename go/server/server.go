@@ -113,7 +113,8 @@ func main() {
 	address := fmt.Sprintf("localhost:%d", *port)
 	listener, err := net.Listen("tcp", address)
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+		log.Printf("failed to listen: %v", err)
+		return
 	}
 	log.Printf("Server running at %s", address)
 
